@@ -5,6 +5,7 @@
  */
 package com.lucas.testeadmissao.domain;
 
+import com.lucas.testeadmissao.domain.enums.Titulacao;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -24,12 +25,12 @@ public class Professor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
-    private String titulacao;
+    private Integer titulacao;
 
-    public Professor(Integer id, String nome, String titulacao) {
+    public Professor(Integer id, String nome, Titulacao titulacao) {
         this.id = id;
         this.nome = nome;
-        this.titulacao = titulacao;
+        this.titulacao = titulacao.getCod();
     }
 
     public Professor() {
@@ -51,12 +52,12 @@ public class Professor implements Serializable {
         this.nome = nome;
     }
 
-    public String getTitulacao() {
-        return titulacao;
+    public Titulacao getTitulacao() {
+        return Titulacao.toEnum(titulacao);
     }
 
-    public void setTitulacao(String titulacao) {
-        this.titulacao = titulacao;
+    public void setTitulacao(Titulacao titulacao) {
+        this.titulacao = titulacao.getCod();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.lucas.testeadmissao;
 import com.lucas.testeadmissao.domain.Aluno;
 import com.lucas.testeadmissao.domain.Professor;
 import com.lucas.testeadmissao.domain.Turma;
+import com.lucas.testeadmissao.domain.enums.Titulacao;
 import com.lucas.testeadmissao.repositories.AlunoRepository;
 import com.lucas.testeadmissao.repositories.ProfessorRepository;
 import com.lucas.testeadmissao.repositories.TurmaRepository;
@@ -33,8 +34,8 @@ public class TesteadmissaoApplication implements CommandLineRunner {
         
         alunoRepository.saveAll(Arrays.asList(aluno1, aluno2));
         
-        Professor prof1 = new Professor(null, "Diego Paiva", "Doutorado");
-        Professor prof2 = new Professor(null, "Gustavo Vieira", "Mestrado");
+        Professor prof1 = new Professor(null, "Diego Paiva", Titulacao.PROFESSORCOLABORADOR);
+        Professor prof2 = new Professor(null, "Gustavo Vieira", Titulacao.PROFESSORTITULAR);
         
         professorRepository.saveAll(Arrays.asList(prof1, prof2));
         
