@@ -5,8 +5,10 @@
  */
 package com.lucas.testeadmissao.resources;
 
-import com.lucas.testeadmissao.domain.Aluno;
-import com.lucas.testeadmissao.services.AlunoService;
+import com.lucas.testeadmissao.domain.Professor;
+import com.lucas.testeadmissao.services.ProfessorService;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,15 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lucas
  */
 @RestController
-@RequestMapping(value = "/alunos")
-public class AlunoResource {
+@RequestMapping(value = "/Professors")
+public class ProfessorResource {
     
     @Autowired
-    private AlunoService service;
+    private ProfessorService service;
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Aluno> find (@PathVariable Integer id) {
-        Aluno obj = service.find(id);
+    public ResponseEntity<Professor> find (@PathVariable Integer id) {
+        Professor obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
     
