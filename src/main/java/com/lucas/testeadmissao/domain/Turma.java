@@ -5,13 +5,14 @@
  */
 package com.lucas.testeadmissao.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,9 +42,11 @@ public class Turma implements Serializable {
     @Basic
     @Temporal(TemporalType.DATE)
     private java.util.Date dataEncerramento;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
+    @JsonManagedReference
     @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos = new ArrayList<>();
 
