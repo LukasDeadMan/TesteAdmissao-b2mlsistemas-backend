@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,21 +23,24 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Professor implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(unique = true)
+    private String matricula;
     private String nome;
     private Integer titulacao;
     @OneToMany(mappedBy = "professor")
     private List<Turma> turmas = new ArrayList<>();
 
-
-    public Professor(Integer id, String nome, Titulacao titulacao) {
+    public Professor(Integer id, String matricula, String nome, Integer titulacao) {
         this.id = id;
+        this.matricula = matricula;
         this.nome = nome;
-        this.titulacao = titulacao.getCod();
+        this.titulacao = titulacao;
     }
 
     public Professor() {
@@ -48,6 +52,14 @@ public class Professor implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
     public String getNome() {
@@ -65,7 +77,7 @@ public class Professor implements Serializable {
     public void setTitulacao(Titulacao titulacao) {
         this.titulacao = titulacao.getCod();
     }
-    
+
     public List<Turma> getTurmas() {
         return turmas;
     }
@@ -73,7 +85,6 @@ public class Professor implements Serializable {
     public void setTurmas(List<Turma> turmas) {
         this.turmas = turmas;
     }
-    
 
     @Override
     public int hashCode() {
@@ -99,6 +110,5 @@ public class Professor implements Serializable {
         }
         return true;
     }
-    
-    
+
 }
