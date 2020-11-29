@@ -6,7 +6,9 @@
 package com.lucas.testeadmissao.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,8 +28,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Turma implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String codigo;
@@ -40,6 +44,8 @@ public class Turma implements Serializable {
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
+    @OneToMany(mappedBy = "turma")
+    private List<Aluno> alunos = new ArrayList<>();
 
     public Turma(String codigo, String sala, Date dataAbertura, Date dataEncerramento, Professor professor) {
         this.codigo = codigo;
@@ -83,7 +89,7 @@ public class Turma implements Serializable {
     public void setDataEncerramento(Date dataEncerramento) {
         this.dataEncerramento = dataEncerramento;
     }
-    
+
     public Professor getProfessor() {
         return professor;
     }
@@ -92,6 +98,13 @@ public class Turma implements Serializable {
         this.professor = professor;
     }
 
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
 
     @Override
     public int hashCode() {
@@ -117,6 +130,5 @@ public class Turma implements Serializable {
         }
         return true;
     }
-    
-    
+
 }

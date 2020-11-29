@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,22 +21,27 @@ import javax.persistence.Id;
  */
 @Entity
 public class Aluno implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     @Column(unique = true)
     private String matricula;
+    @ManyToOne
+    @JoinColumn(name = "turma_id")
+    private Turma turma;
 
     public Aluno() {
     }
 
-    public Aluno(Integer id, String matricula, String nome) {
+    public Aluno(Integer id, String nome, String matricula, Turma turma) {
         this.id = id;
+        this.nome = nome;
         this.matricula = matricula;
-        this.nome = nome;  
+        this.turma = turma;
     }
 
     public Integer getId() {
@@ -59,6 +66,14 @@ public class Aluno implements Serializable {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 
     @Override
@@ -86,9 +101,4 @@ public class Aluno implements Serializable {
         return true;
     }
 
-    
-
-  
-    
-    
 }

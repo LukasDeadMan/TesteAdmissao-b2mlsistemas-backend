@@ -31,7 +31,7 @@ public class Professor implements Serializable {
     private Integer titulacao;
     @OneToMany(mappedBy = "professor")
     private List<Turma> turmas = new ArrayList<>();
-    
+
 
     public Professor(Integer id, String nome, Titulacao titulacao) {
         this.id = id;
@@ -65,6 +65,15 @@ public class Professor implements Serializable {
     public void setTitulacao(Titulacao titulacao) {
         this.titulacao = titulacao.getCod();
     }
+    
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
+    
 
     @Override
     public int hashCode() {
