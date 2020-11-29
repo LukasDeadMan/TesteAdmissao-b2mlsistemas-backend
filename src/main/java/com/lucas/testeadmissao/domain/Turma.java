@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -35,15 +37,19 @@ public class Turma implements Serializable {
     @Basic
     @Temporal(TemporalType.DATE)
     private java.util.Date dataEncerramento;
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
 
-    public Turma() {
-    }
-
-    public Turma(String codigo, String sala, Date dataAbertura, Date dataEncerramento) {
+    public Turma(String codigo, String sala, Date dataAbertura, Date dataEncerramento, Professor professor) {
         this.codigo = codigo;
         this.sala = sala;
         this.dataAbertura = dataAbertura;
         this.dataEncerramento = dataEncerramento;
+        this.professor = professor;
+    }
+
+    public Turma() {
     }
 
     public String getCodigo() {
@@ -77,6 +83,15 @@ public class Turma implements Serializable {
     public void setDataEncerramento(Date dataEncerramento) {
         this.dataEncerramento = dataEncerramento;
     }
+    
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
 
     @Override
     public int hashCode() {

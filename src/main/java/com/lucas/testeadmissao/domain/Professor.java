@@ -7,11 +7,14 @@ package com.lucas.testeadmissao.domain;
 
 import com.lucas.testeadmissao.domain.enums.Titulacao;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -26,6 +29,9 @@ public class Professor implements Serializable {
     private Integer id;
     private String nome;
     private Integer titulacao;
+    @OneToMany(mappedBy = "professor")
+    private List<Turma> turmas = new ArrayList<>();
+    
 
     public Professor(Integer id, String nome, Titulacao titulacao) {
         this.id = id;
