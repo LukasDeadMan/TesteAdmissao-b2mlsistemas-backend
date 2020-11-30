@@ -5,14 +5,13 @@
  */
 package com.lucas.testeadmissao.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,8 +19,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -36,17 +33,14 @@ public class Turma implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String codigo;
     private String sala;
-    @Basic
-    @Temporal(TemporalType.DATE)
-    private java.util.Date dataAbertura;
-    @Basic
-    @Temporal(TemporalType.DATE)
-    private java.util.Date dataEncerramento;
-    @JsonBackReference
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dataAbertura;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dataEncerramento;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
-    @JsonManagedReference
     @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos = new ArrayList<>();
 

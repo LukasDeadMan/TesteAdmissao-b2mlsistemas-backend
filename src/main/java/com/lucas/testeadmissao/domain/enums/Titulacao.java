@@ -11,9 +11,9 @@ package com.lucas.testeadmissao.domain.enums;
  */
 public enum Titulacao {
     
-    PROFESSORCOLABORADOR(1, "Professor Colaborador"),
-    PROFESSORDOUTOR(2, "Professor Doutor"),
-    PROFESSORTITULAR(3, "Professor Titular");
+    PROFESSOR_COLABORADOR(1, "Professor Colaborador"),
+    PROFESSOR_DOUTOR(2, "Professor Doutor"),
+    PROFESSOR_TITULAR(3, "Professor Titular");
     
     private int cod;
     private String descricao;

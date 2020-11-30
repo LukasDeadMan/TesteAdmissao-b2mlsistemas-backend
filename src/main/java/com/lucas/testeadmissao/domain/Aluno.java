@@ -5,7 +5,7 @@
  */
 package com.lucas.testeadmissao.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -31,7 +31,7 @@ public class Aluno implements Serializable {
     private String nome;
     @Column(unique = true)
     private String matricula;
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "turma_id")
     private Turma turma;
@@ -39,7 +39,7 @@ public class Aluno implements Serializable {
     public Aluno() {
     }
 
-    public Aluno(Integer id, String nome, String matricula, Turma turma) {
+    public Aluno(Integer id, String nome, String matricula,Turma turma) {
         this.id = id;
         this.nome = nome;
         this.matricula = matricula;

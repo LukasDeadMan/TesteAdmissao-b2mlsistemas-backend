@@ -5,8 +5,8 @@
  */
 package com.lucas.testeadmissao.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.lucas.testeadmissao.domain.enums.Titulacao;
+import com.lucas.testeadmissao.domain.interfaces.iUsuarios;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import javax.persistence.OneToMany;
  * @author lucas
  */
 @Entity
-public class Professor implements Serializable {
+public class Professor implements Serializable, iUsuarios {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,7 +34,6 @@ public class Professor implements Serializable {
     private String matricula;
     private String nome;
     private Integer titulacao;
-    @JsonManagedReference
     @OneToMany(mappedBy = "professor")
     private List<Turma> turmas = new ArrayList<>();
 
@@ -56,20 +55,24 @@ public class Professor implements Serializable {
         this.id = id;
     }
 
-    public String getMatricula() {
-        return matricula;
+    @Override
+    public void definirNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public String getNome() {
+    @Override
+    public String obterNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    @Override
+    public void definirMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    @Override
+    public String obterMatricula() {
+        return matricula;
     }
 
     public Titulacao getTitulacao() {
