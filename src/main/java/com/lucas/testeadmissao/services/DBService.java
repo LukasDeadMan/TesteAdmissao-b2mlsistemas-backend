@@ -58,10 +58,10 @@ public class DBService {
         SimpleDateFormat sdf = new SimpleDateFormat("dd//MM/yyyy");
         
         
-        Turma turma1 = new Turma (null, "1412", "Sala 01", sdf.parse("22/04/2020"),
-                                   sdf.parse("25/07/2020"), prof1);
-        Turma turma2 = new Turma (null, "1511", "Sala 02", sdf.parse("15/11/2020"),
-                                  sdf.parse("22/01/2021"), prof2);
+        Turma turma1 = new Turma (null, "1412", "Sala 01", null,
+                                   null, prof1);
+        Turma turma2 = new Turma (null, "1511", "Sala 02", null,
+                                  null, prof2);
         
         turmaRepository.saveAll(Arrays.asList(turma1, turma2));
         

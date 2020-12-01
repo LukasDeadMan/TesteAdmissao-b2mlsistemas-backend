@@ -5,8 +5,6 @@
  */
 package com.lucas.testeadmissao.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucas.testeadmissao.domain.interfaces.iTurma;
 
 import java.io.Serializable;
@@ -23,8 +21,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -47,10 +46,12 @@ public class Turma implements Serializable, iTurma {
     @Length(min = 5, max = 20, message = "O tamanho deve ser entre 5 e 20 caracteres!")
     private String sala;
     
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "data", nullable = true)
+    @Temporal(TemporalType.DATE)
     private Date dataAbertura;
     
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "data", nullable = true)
+    @Temporal(TemporalType.DATE)
     private Date dataEncerramento;
     @ManyToOne
     @JoinColumn(name = "professor_id")
