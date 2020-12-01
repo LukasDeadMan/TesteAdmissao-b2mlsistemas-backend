@@ -48,11 +48,9 @@ public class Turma implements Serializable, iTurma {
     private String sala;
     
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @NotNull(message = "Preenchimento obrigatório")
     private Date dataAbertura;
     
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @NotNull(message = "Preenchimento obrigatório")
     private Date dataEncerramento;
     @ManyToOne
     @JoinColumn(name = "professor_id")
