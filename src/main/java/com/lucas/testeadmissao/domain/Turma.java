@@ -7,11 +7,14 @@ package com.lucas.testeadmissao.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lucas.testeadmissao.domain.interfaces.iTurma;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +28,7 @@ import javax.persistence.OneToMany;
  * @author lucas
  */
 @Entity
-public class Turma implements Serializable {
+public class Turma implements Serializable, iTurma {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,8 +44,8 @@ public class Turma implements Serializable {
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
-    @OneToMany(mappedBy = "turma")
-    private List<Aluno> alunos = new ArrayList<>();
+    @OneToMany(mappedBy = "id.turma")
+    private Set<AlunoTurma> alunos = new HashSet<>();
 
     public Turma(String codigo, String sala, Date dataAbertura, Date dataEncerramento, Professor professor) {
         this.codigo = codigo;
@@ -54,6 +57,14 @@ public class Turma implements Serializable {
 
     public Turma() {
     }
+    
+    public List<Aluno> getListaAlunos() {
+        List<Aluno> lista = new ArrayList<>();
+        for (AlunoTurma x : alunos){
+            lista.add(x.getAluno());
+        }
+        return lista;
+    }
 
     public String getCodigo() {
         return codigo;
@@ -62,6 +73,22 @@ public class Turma implements Serializable {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+    
+    @Override
+    public Boolean estaAberta() {
+        return true;
+    }
+
+    @Override
+    public void definirProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    @Override
+    public void incluirAluno(Aluno aluno) {
+        
+    }
+
 
     public String getSala() {
         return sala;
@@ -95,11 +122,11 @@ public class Turma implements Serializable {
         this.professor = professor;
     }
 
-    public List<Aluno> getAlunos() {
+    public Set<AlunoTurma> getAlunos() {
         return alunos;
     }
 
-    public void setAlunos(List<Aluno> alunos) {
+    public void setAlunos(Set<AlunoTurma> alunos) {
         this.alunos = alunos;
     }
 
@@ -127,5 +154,6 @@ public class Turma implements Serializable {
         }
         return true;
     }
+
 
 }

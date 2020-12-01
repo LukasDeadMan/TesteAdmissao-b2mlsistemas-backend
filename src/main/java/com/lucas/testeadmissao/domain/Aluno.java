@@ -5,77 +5,95 @@
  */
 package com.lucas.testeadmissao.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lucas.testeadmissao.domain.interfaces.iUsuarios;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author lucas
  */
 @Entity
-public class Aluno implements Serializable {
+public class Aluno implements Serializable, iUsuarios {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome;
     @Column(unique = true)
     private String matricula;
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "turma_id")
-    private Turma turma;
+    private String nome;
+    @OneToMany(mappedBy = "id.aluno")
+    private Set<AlunoTurma> turmas = new HashSet<>();
 
     public Aluno() {
     }
 
-    public Aluno(Integer id, String nome, String matricula,Turma turma) {
+    public Aluno(Integer id, String matricula, String nome) {
         this.id = id;
-        this.nome = nome;
         this.matricula = matricula;
-        this.turma = turma;
+        this.nome = nome;
+    }
+
+    @Override
+    public void definirNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public String obterNome() {
+        return nome;
+    }
+
+    @Override
+    public void definirMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    @Override
+    public String obterMatricula() {
+        return matricula;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    public String getMatricula() {
+        return matricula;
+    }
+
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
-    public Turma getTurma() {
-        return turma;
+    public Set<AlunoTurma> getTurmas() {
+        return turmas;
     }
 
-    public void setTurma(Turma turma) {
-        this.turma = turma;
+    public void setTurmas(Set<AlunoTurma> turmas) {
+        this.turmas = turmas;
     }
 
     @Override

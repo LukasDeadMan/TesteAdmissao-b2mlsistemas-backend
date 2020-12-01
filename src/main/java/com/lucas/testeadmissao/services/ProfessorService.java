@@ -19,7 +19,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -76,8 +75,9 @@ public class ProfessorService {
     }
     
 
-    public Professor fromUpdateDTO(ResponseEntity<Professor> entity, ProfessorDTO objDto) { 
-        return new Professor(entity.getBody().getId(), entity.getBody().obterMatricula(), 
+    public Professor fromUpdateDTO(Integer id, ProfessorDTO objDto) { 
+        Professor obj = find(id);
+        return new Professor(obj.getId(), obj.obterMatricula(), 
                 objDto.getNome(), objDto.getTitulacao().getCod());
     }
 }

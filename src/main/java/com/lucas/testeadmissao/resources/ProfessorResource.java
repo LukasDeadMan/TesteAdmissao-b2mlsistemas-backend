@@ -58,8 +58,7 @@ public class ProfessorResource {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody ProfessorDTO objDto,
             @PathVariable Integer id) {
-        ResponseEntity<Professor> entity = find(id);
-        Professor obj = service.fromUpdateDTO(entity, objDto);
+        Professor obj = service.fromUpdateDTO(id, objDto);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
     }

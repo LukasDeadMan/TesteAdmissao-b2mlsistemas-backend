@@ -5,6 +5,7 @@
  */
 package com.lucas.testeadmissao.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucas.testeadmissao.domain.enums.Titulacao;
 import com.lucas.testeadmissao.domain.interfaces.iUsuarios;
 import java.io.Serializable;
@@ -73,6 +74,22 @@ public class Professor implements Serializable, iUsuarios {
     @Override
     public String obterMatricula() {
         return matricula;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Titulacao getTitulacao() {
