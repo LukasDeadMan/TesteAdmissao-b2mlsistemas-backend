@@ -5,6 +5,7 @@
  */
 package com.lucas.testeadmissao.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lucas.testeadmissao.domain.interfaces.iTurma;
 
 import java.io.Serializable;
@@ -46,13 +47,13 @@ public class Turma implements Serializable, iTurma {
     @Length(min = 5, max = 20, message = "O tamanho deve ser entre 5 e 20 caracteres!")
     private String sala;
     
-    @Column(name = "data", nullable = true)
-    @Temporal(TemporalType.DATE)
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date dataAbertura;
     
-    @Column(name = "data", nullable = true)
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date dataEncerramento;
+    
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;

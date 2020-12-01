@@ -5,13 +5,11 @@
  */
 package com.lucas.testeadmissao.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lucas.testeadmissao.domain.Professor;
 import com.lucas.testeadmissao.domain.Turma;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
@@ -31,12 +29,10 @@ public class TurmaDTO implements Serializable {
     @Length(min = 5, max = 20, message = "O tamanho deve ser entre 5 e 20 caracteres!")
     private String sala;
     
-    @Column(name = "data", nullable = true)
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date dataAbertura;
     
-    @Column(name = "data", nullable = true)
-    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date dataEncerramento;
     private Professor professor;
 
