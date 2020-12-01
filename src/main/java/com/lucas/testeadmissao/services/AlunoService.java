@@ -10,14 +10,15 @@ import com.lucas.testeadmissao.dto.AlunoDTO;
 import com.lucas.testeadmissao.repositories.AlunoRepository;
 import com.lucas.testeadmissao.services.exceptions.DataIntegrityException;
 import com.lucas.testeadmissao.services.exceptions.ObjectNotFoundException;
+
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**

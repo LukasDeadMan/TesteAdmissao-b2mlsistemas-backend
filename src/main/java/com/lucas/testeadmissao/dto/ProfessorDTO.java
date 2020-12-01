@@ -5,6 +5,7 @@
  */
 package com.lucas.testeadmissao.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucas.testeadmissao.domain.Professor;
 import com.lucas.testeadmissao.domain.enums.Titulacao;
 import java.io.Serializable;
@@ -23,7 +24,7 @@ public class ProfessorDTO implements Serializable {
     private Integer id;
     private String matricula;
     @NotEmpty(message = "Preenchimento obrigatório")
-    @Length(min = 5, max = 80, message = "O tamanho deve ser entre 5 e 80 caracteres!")
+    @Length(min = 4, max = 80, message = "O tamanho deve ser entre 5 e 80 caracteres!")
     private String nome;
     @NotNull(message = "Preenchimento obrigatório")
     private Integer titulacao;

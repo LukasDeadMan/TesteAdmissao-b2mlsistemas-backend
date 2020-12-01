@@ -5,9 +5,12 @@
  */
 package com.lucas.testeadmissao.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucas.testeadmissao.domain.interfaces.iUsuarios;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
@@ -16,6 +19,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 
 /**
  *
@@ -32,6 +36,8 @@ public class Aluno implements Serializable, iUsuarios {
     @Column(unique = true)
     private String matricula;
     private String nome;
+ 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.aluno")
     private Set<AlunoTurma> turmas = new HashSet<>();
 
@@ -42,6 +48,15 @@ public class Aluno implements Serializable, iUsuarios {
         this.id = id;
         this.matricula = matricula;
         this.nome = nome;
+    }
+    
+    @JsonIgnore
+    public List<Turma> getHistorico() {
+        List<Turma> lista = new ArrayList<>();
+        for(AlunoTurma x : turmas) {
+            lista.add(x.getTurma());
+        }
+        return lista;
     }
 
     @Override
@@ -63,7 +78,7 @@ public class Aluno implements Serializable, iUsuarios {
     public String obterMatricula() {
         return matricula;
     }
-
+    
     public Integer getId() {
         return id;
     }

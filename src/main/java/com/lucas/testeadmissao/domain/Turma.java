@@ -8,13 +8,14 @@ package com.lucas.testeadmissao.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucas.testeadmissao.domain.interfaces.iTurma;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 /**
  *
@@ -29,41 +33,52 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Turma implements Serializable, iTurma {
-
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Column(unique = true)
     private String codigo;
+    
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Length(min = 5, max = 20, message = "O tamanho deve ser entre 5 e 20 caracteres!")
     private String sala;
+    
     @JsonFormat(pattern = "dd/MM/yyyy")
+    @NotNull(message = "Preenchimento obrigatório")
     private Date dataAbertura;
+    
     @JsonFormat(pattern = "dd/MM/yyyy")
+    @NotNull(message = "Preenchimento obrigatório")
     private Date dataEncerramento;
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;
+    
     @OneToMany(mappedBy = "id.turma")
     private Set<AlunoTurma> alunos = new HashSet<>();
 
-    public Turma(String codigo, String sala, Date dataAbertura, Date dataEncerramento, Professor professor) {
+    public Turma(Integer id, String codigo, String sala, Date dataAbertura, Date dataEncerramento, Professor professor) {
+        this.id = id;
         this.codigo = codigo;
         this.sala = sala;
         this.dataAbertura = dataAbertura;
         this.dataEncerramento = dataEncerramento;
-        this.professor = professor;
+        this.professor = (professor == null) ? null :professor;
     }
 
     public Turma() {
     }
-    
-    public List<Aluno> getListaAlunos() {
-        List<Aluno> lista = new ArrayList<>();
-        for (AlunoTurma x : alunos){
-            lista.add(x.getAluno());
-        }
-        return lista;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCodigo() {
@@ -74,9 +89,14 @@ public class Turma implements Serializable, iTurma {
         this.codigo = codigo;
     }
     
+    public Boolean getOpen() {
+        return estaAberta();
+    }
+    
     @Override
     public Boolean estaAberta() {
-        return true;
+        Date instant = new Date();
+        return dataEncerramento.after(instant);
     }
 
     @Override
@@ -86,7 +106,9 @@ public class Turma implements Serializable, iTurma {
 
     @Override
     public void incluirAluno(Aluno aluno) {
-        
+        AlunoTurma at = new AlunoTurma();
+        at.setAluno(aluno);
+        alunos.add(at);
     }
 
 
@@ -155,5 +177,5 @@ public class Turma implements Serializable, iTurma {
         return true;
     }
 
-
+    
 }

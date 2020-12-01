@@ -7,6 +7,7 @@ package com.lucas.testeadmissao.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
@@ -24,7 +25,7 @@ public class AlunoTurma implements Serializable {
 
     public AlunoTurma() {
     }
-    
+
     public AlunoTurma(Aluno aluno, Turma turma) {
         id.setAluno(aluno);
         id.setTurma(turma);
@@ -42,8 +43,43 @@ public class AlunoTurma implements Serializable {
         return id.getAluno();
     }
     
+    public void setAluno(Aluno aluno) {
+        id.setAluno(aluno);
+    }
+
+    @JsonIgnore
     public Turma getTurma() {
         return id.getTurma();
     }
+    
+     public void setTurma(Turma turma) {
+        id.setTurma(turma);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 13 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AlunoTurma other = (AlunoTurma) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
     
 }

@@ -18,22 +18,14 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class AlunoTurmaPK implements Serializable {
     private static final long serialVersionUID = 1L;
+   
+    @ManyToOne
+    @JoinColumn(name = "turma_id")
+    private Turma turma;
     
     @ManyToOne
     @JoinColumn(name = "aluno_id")
     private Aluno aluno;
-    
-    @ManyToOne
-    @JoinColumn(name = "turma_id")
-    private Turma turma;
-
-    public Aluno getAluno() {
-        return aluno;
-    }
-
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
-    }
 
     public Turma getTurma() {
         return turma;
@@ -43,11 +35,19 @@ public class AlunoTurmaPK implements Serializable {
         this.turma = turma;
     }
 
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 59 * hash + Objects.hashCode(this.aluno);
-        hash = 59 * hash + Objects.hashCode(this.turma);
+        hash = 97 * hash + Objects.hashCode(this.turma);
+        hash = 97 * hash + Objects.hashCode(this.aluno);
         return hash;
     }
 
@@ -63,15 +63,14 @@ public class AlunoTurmaPK implements Serializable {
             return false;
         }
         final AlunoTurmaPK other = (AlunoTurmaPK) obj;
-        if (!Objects.equals(this.aluno, other.aluno)) {
+        if (!Objects.equals(this.turma, other.turma)) {
             return false;
         }
-        if (!Objects.equals(this.turma, other.turma)) {
+        if (!Objects.equals(this.aluno, other.aluno)) {
             return false;
         }
         return true;
     }
-    
     
     
 }

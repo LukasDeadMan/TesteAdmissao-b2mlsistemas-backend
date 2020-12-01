@@ -8,6 +8,7 @@ package com.lucas.testeadmissao.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucas.testeadmissao.domain.enums.Titulacao;
 import com.lucas.testeadmissao.domain.interfaces.iUsuarios;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class Professor implements Serializable, iUsuarios {
     private String matricula;
     private String nome;
     private Integer titulacao;
+    @JsonIgnore
     @OneToMany(mappedBy = "professor")
     private List<Turma> turmas = new ArrayList<>();
 
@@ -47,7 +49,7 @@ public class Professor implements Serializable, iUsuarios {
 
     public Professor() {
     }
-
+    
     public Integer getId() {
         return id;
     }
