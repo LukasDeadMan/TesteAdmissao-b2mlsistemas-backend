@@ -1,10 +1,12 @@
-Teste Admissional
+## Teste Admissional
 
 Este projeto faz parte do teste admissional para a empresa B2ml, que consiste em um Back-end de uma aplicação web.
 
+### Back-end
+
 Aplicação REST API desenvolvida com Java 8 e Spring Boot 2.4.0.
 
-Inicializando o projeto
+### Inicializando o projeto
 
 Para inicializar o back-end, siga os passos abaixo:
 
@@ -30,13 +32,15 @@ Para que o projeto seja corretamente executado, é necessário se atentar para a
 
 Nele há algumas informações que precisam ser modificadas para o acesso ao banco de dados PostgreSQL.
 
+### Dependência
+
 1- spring.datasource.url = jdbc:postgresql://localhost:5432/admissional: Foram utilizadas a url e a porta padrão para o banco PostgreSQL, porém podem ser alteradas de acordo com as suas configurações.
 
 2- spring.datasource.username = postgres: Alterar o usuário do banco de acordo com suas configurações.
 
 3- spring.datasource.password = 123: Alterar a senha do usuário para o banco de acordo com suas configurações.
 
-Stack utilizada
+### Stack utilizada
 
 1- IDE: Netbeans 8.2
 
@@ -46,7 +50,7 @@ Stack utilizada
 
 4- Banco de Dados: PostgreSQL 12.5
 
-Opicional
+### Opicional
 
 Deixei a opção de uso do Banco em memória H2, pára usa-lo é só mudar application.properties. Tem que mudar spring.profiles.active=dev para spring.profiles.active=test.
 Assim não será preciso configurar o PostgreSQL, é só acessar através do caminho localhost:8080/h2-console.
