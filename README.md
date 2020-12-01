@@ -28,11 +28,11 @@ Para inicializar o back-end, siga os passos abaixo:
 6- Caso queira testar os endpoints fora da aplicação, os acessos podem ser feitos de alguma ferramenta que teste requisições, como o Insomnia.
    Disponibilizei meu arquivo json para testes de requisições no Insomnia, ele se encontra junto com o pom.xml.
 
+### Dependência
+
 Para que o projeto seja corretamente executado, é necessário se atentar para algumas configurações no arquivo application-dev.properties.
 
 Nele há algumas informações que precisam ser modificadas para o acesso ao banco de dados PostgreSQL.
-
-### Dependência
 
 1- spring.datasource.url = jdbc:postgresql://localhost:5432/admissional: Foram utilizadas a url e a porta padrão para o banco PostgreSQL, porém podem ser alteradas de acordo com as suas configurações.
 
