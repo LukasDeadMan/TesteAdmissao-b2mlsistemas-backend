@@ -5,7 +5,7 @@
  */
 package com.lucas.testeadmissao.domain.interfaces;
 
-import com.lucas.testeadmissao.domain.Aluno;
+import com.lucas.testeadmissao.domain.AlunoTurma;
 import com.lucas.testeadmissao.domain.Professor;
 
 /**
@@ -15,5 +15,5 @@ import com.lucas.testeadmissao.domain.Professor;
 public interface iTurma {
     public Boolean estaAberta();
     public void definirProfessor(Professor professor);
-    public void incluirAluno(Aluno aluno);
+    public void incluirAluno(AlunoTurma aluno);
 }

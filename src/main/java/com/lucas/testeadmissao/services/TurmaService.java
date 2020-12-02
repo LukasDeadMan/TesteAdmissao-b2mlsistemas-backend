@@ -53,15 +53,23 @@ public class TurmaService {
     }
 
     public Turma insertAluno(Turma obj, Integer id) {
-        find(id);
-        if (obj.getProfessor() == null) {
-            obj.setProfessor(null);
-        } else {
-            obj.setProfessor(professorService.find(obj.getProfessor().getId()));
-        }
-
+        Turma newObj = find(id);
         
-        return repo.save(obj);
+        if (obj.getProfessor() == null) {
+            newObj.setProfessor(null);
+        } else {
+            newObj.setProfessor(professorService.find(obj.getProfessor().getId()));
+        }
+        
+        for (AlunoTurma at : obj.getAlunos()){
+            at.setAluno(alunoService.find(at.getAluno().getId()));
+            at.setTurma(find(id));
+            newObj.incluirAluno(at);
+        }
+        
+        alunoTurmarRepo.saveAll(newObj.getAlunos());
+       
+        return repo.save(newObj);
     }
 
     public Turma update(Turma obj, Integer id) {
@@ -98,6 +106,7 @@ public class TurmaService {
         newObj.setDataAbertura(obj.getDataAbertura());
         newObj.setDataEncerramento(obj.getDataEncerramento());
         newObj.setProfessor(obj.getProfessor());
+        newObj.setAlunos(obj.getAlunos());
     }
 
 }

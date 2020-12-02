@@ -22,10 +22,8 @@ public class TurmaDTO implements Serializable {
     
     private Integer id;
     
-    @NotEmpty(message = "Preenchimento obrigatório")
     private String codigo;
-    
-    @NotEmpty(message = "Preenchimento obrigatório")
+
     @Length(min = 5, max = 20, message = "O tamanho deve ser entre 5 e 20 caracteres!")
     private String sala;
     

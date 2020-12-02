@@ -49,10 +49,10 @@ public class TurmaResource {
     }
     
     @RequestMapping(value = "/insert/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Turma> insertAluno(@Valid @RequestBody Turma obj,
+    public ResponseEntity<Void> insertAluno(@Valid @RequestBody Turma obj,
             @PathVariable Integer id) {
         obj = service.insertAluno(obj, id);
-        return ResponseEntity.ok().body(obj);
+        return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)

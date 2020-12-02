@@ -22,8 +22,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
@@ -39,11 +37,9 @@ public class Turma implements Serializable, iTurma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotEmpty(message = "Preenchimento obrigatório")
     @Column(unique = true)
     private String codigo;
     
-    @NotEmpty(message = "Preenchimento obrigatório")
     @Length(min = 5, max = 20, message = "O tamanho deve ser entre 5 e 20 caracteres!")
     private String sala;
     
@@ -105,10 +101,8 @@ public class Turma implements Serializable, iTurma {
     }
 
     @Override
-    public void incluirAluno(Aluno aluno) {
-        AlunoTurma at = new AlunoTurma();
-        at.setAluno(aluno);
-        alunos.add(at);
+    public void incluirAluno(AlunoTurma aluno) {
+        alunos.add(aluno);
     }
 
 
