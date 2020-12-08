@@ -27,10 +27,10 @@ public class TurmaDTO implements Serializable {
     @Length(min = 5, max = 20, message = "O tamanho deve ser entre 5 e 20 caracteres!")
     private String sala;
     
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataAbertura;
     
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataEncerramento;
     private Professor professor;
 

@@ -55,13 +55,13 @@ public class DBService {
         
         alunoRepository.saveAll(Arrays.asList(aluno1, aluno2, aluno3));
         
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         
         
-        Turma turma1 = new Turma (null, "1412", "Sala 01", sdf.parse("22/04/2020 00:00"),
-                                   sdf.parse("25/07/2020 00:00"), prof1);
-        Turma turma2 = new Turma (null, "1511", "Sala 02", sdf.parse("15/11/2020 00:00"),
-                                  sdf.parse("22/01/2021 00:00"), prof2);
+        Turma turma1 = new Turma (null, "1412", "Sala 01", sdf.parse("2020-04-22"),
+                                   sdf.parse("2020-07-25"), prof1);
+        Turma turma2 = new Turma (null, "1511", "Sala 02", sdf.parse("2020-11-21"),
+                                  sdf.parse("2021-01-22"), prof2);
         
         turmaRepository.saveAll(Arrays.asList(turma1, turma2));
         

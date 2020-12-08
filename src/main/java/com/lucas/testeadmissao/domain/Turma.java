@@ -44,10 +44,10 @@ public class Turma implements Serializable, iTurma {
     private String sala;
     
 
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataAbertura;
     
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataEncerramento;
     
     @ManyToOne
