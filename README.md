@@ -54,7 +54,7 @@ Nele há algumas informações que precisam ser modificadas para o acesso ao ban
 
 4- Banco de Dados: PostgreSQL 12.5
 
-### Opicional
+### Opcional
 
 Deixei a opção de uso do Banco em memória H2, pára usa-lo é só mudar <b><i>application.properties</i></b>. Tem que mudar <b><i>spring.profiles.active=dev</i></b> para <b><i>spring.profiles.active=test</i></b>.
 Assim não será preciso configurar o PostgreSQL, é só acessar através do caminho localhost:8080/h2-console.
